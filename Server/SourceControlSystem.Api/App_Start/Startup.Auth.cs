@@ -7,7 +7,8 @@
     using Microsoft.Owin.Security.OAuth;
     using Owin;
     using SourceControlSystem.Api.Providers;
-    using SourceControlSystem.Api.Models;
+
+    using SourceControlSystem.Data;
 
     public partial class Startup
     {
