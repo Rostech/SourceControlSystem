@@ -1,7 +1,10 @@
 ﻿namespace SourceControlSystem.Models
 {
+    using Common.Constants;
+    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+
     public class SoftwareProject
     {
         private ICollection<User> users;
@@ -18,11 +21,13 @@
         public bool Private { get; set; }
 
         [Required]
-        [MaxLength(100)]
+        [MaxLength(ValidationConstants.MaxProjectName)]
         public string Name { get; set; }
 
-        [MaxLength(1000)]
+        [MaxLength(ValidationConstants.MaxProjectDescription)]
         public string Description { get; set; }
+
+        public DateTime CreatedOn { get; set; }
 
         public virtual ICollection<User> Users
         {
