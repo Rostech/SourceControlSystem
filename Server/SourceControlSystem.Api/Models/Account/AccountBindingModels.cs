@@ -48,6 +48,12 @@
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [StringLength(25, ErrorMessage = "Name should be less than 25 symbols.")]
+        public string FirstName { get; set; }
+
+        [StringLength(25, ErrorMessage = "Name should be less than 25 symbols.")]
+        public string LastName { get; set; }
     }
 
     public class RegisterExternalBindingModel
