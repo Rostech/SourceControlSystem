@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SourceControlSystem.Api", "
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{11BA83F1-E628-4B12-8347-4BE0CF2C50EE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SourceControlSystem.Models", "Data\SourceControlSystem.Models\SourceControlSystem.Models.csproj", "{322F5B6F-FE8D-4388-9630-1778BAAF3013}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SourceControlSystem.Data", "Data\SourceControlSystem.Data\SourceControlSystem.Data.csproj", "{1E1B7347-F795-4C87-8E41-1E54F13C87ED}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,11 +23,21 @@ Global
 		{60062912-DDFC-4A63-8275-D2DFB4B0B57D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{60062912-DDFC-4A63-8275-D2DFB4B0B57D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{60062912-DDFC-4A63-8275-D2DFB4B0B57D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{322F5B6F-FE8D-4388-9630-1778BAAF3013}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{322F5B6F-FE8D-4388-9630-1778BAAF3013}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{322F5B6F-FE8D-4388-9630-1778BAAF3013}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{322F5B6F-FE8D-4388-9630-1778BAAF3013}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E1B7347-F795-4C87-8E41-1E54F13C87ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E1B7347-F795-4C87-8E41-1E54F13C87ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E1B7347-F795-4C87-8E41-1E54F13C87ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E1B7347-F795-4C87-8E41-1E54F13C87ED}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{60062912-DDFC-4A63-8275-D2DFB4B0B57D} = {A6273C0B-8196-4293-9AFA-4972363AD6AB}
+		{322F5B6F-FE8D-4388-9630-1778BAAF3013} = {11BA83F1-E628-4B12-8347-4BE0CF2C50EE}
+		{1E1B7347-F795-4C87-8E41-1E54F13C87ED} = {11BA83F1-E628-4B12-8347-4BE0CF2C50EE}
 	EndGlobalSection
 EndGlobal
