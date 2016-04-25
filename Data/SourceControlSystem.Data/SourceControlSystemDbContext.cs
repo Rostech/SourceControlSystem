@@ -4,7 +4,9 @@
 
     using SourceControlSystem.Models;
     using System.Data.Entity;
-    public class SourceControlSystemDbContext : IdentityDbContext<User>
+    using System;
+
+    public class SourceControlSystemDbContext : IdentityDbContext<User>, ISourceControlSystemDbContext
     {
         public SourceControlSystemDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
@@ -13,7 +15,7 @@
 
         public virtual IDbSet<Commit> Commits { get; set; }
 
-        public virtual IDbSet<SoftwareProject> SoftwareProjcets { get; set; }
+        public virtual IDbSet<SoftwareProject> SoftwareProjects { get; set; }
 
         public static SourceControlSystemDbContext Create()
         {

@@ -60,6 +60,7 @@
   <ItemGroup>
     <Compile Include="EfGenericRepository.cs" />
     <Compile Include="IRepository.cs" />
+    <Compile Include="ISourceControlSystemDbContext.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SourceControlSystemDbContext.cs" />

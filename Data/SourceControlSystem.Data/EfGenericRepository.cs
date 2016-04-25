@@ -7,7 +7,7 @@
 
     public class EfGenericRepository<T> : IRepository<T> where T : class
     {
-        public EfGenericRepository(DbContext context)
+        public EfGenericRepository(ISourceControlSystemDbContext context)
         {
             if (context == null)
             {
@@ -20,7 +20,7 @@
 
         protected IDbSet<T> DbSet { get; set; }
 
-        protected DbContext Context { get; set; }
+        protected ISourceControlSystemDbContext Context { get; set; }
 
         public virtual IQueryable<T> All()
         {
@@ -96,10 +96,10 @@
             return this.Context.SaveChanges();
         }
 
-        public Task<int> SaveChangesAsync()
-        {
-            return this.Context.SaveChangesAsync();
-        }
+        //public Task<int> SaveChangesAsync()
+        //{
+        //    return this.Context.SaveChangesAsync();
+        //}
 
         public void Dispose()
         {

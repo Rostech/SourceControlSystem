@@ -6,24 +6,22 @@
     using SourceControlSystem.Data;
     using SourceControlSystem.Models;
     using Common.Constants;
+    using Services.Data.Contracts;
+    using Services.Data;
+
     public class ProjectsController : ApiController
     {
-        private readonly IRepository<SoftwareProject> projects;
-        private readonly IRepository<User> users;
+        private readonly IProjectsService projects;
 
-        public ProjectsController()
+        public ProjectsController(IProjectsService projectService)
         {
-            var db = new SourceControlSystemDbContext();
-            this.users = new EfGenericRepository<User>(db);
+            this.projects = projectService;
         }
 
         public IHttpActionResult Get()
         {
             var result = this.projects
-                .All()
-                .OrderByDescending(pr => pr.CreatedOn)
-                .Skip(0)
-                .Take(GlobalConstants.DefaultPageSize)
+                .All(page: 1)
                 .Select(Models.Projects.SoftwareProjectDetailsResponseModel.FromModel)
                 .ToList();
 
@@ -55,34 +53,25 @@
         [Authorize]
         public IHttpActionResult Post(Models.Projects.SaveProjectRequestModel model)
         {
-            var currentUser = this.users
-                .All()
-                .FirstOrDefault(u => u.UserName == this.User.Identity.Name);
-
-            var newProject = new SourceControlSystem.Models.SoftwareProject
+            if(!this.ModelState.IsValid)
             {
-                Name = model.Name,
-                Description = model.Description,
-                Private = model.Private,
-                CreatedOn = System.DateTime.Now
-            };
+                return this.BadRequest(this.ModelState);
+            }
 
-            newProject.Users.Add(currentUser);
+            var createdProjectId = this.projects.Add(
+                model.Name, 
+                model.Description, 
+                this.User.Identity.Name, 
+                model.Private);
 
-            this.projects.Add(newProject);
-            this.projects.SaveChanges();
-
-            return this.Ok(newProject.Id);
+            return this.Ok(createdProjectId);
         }
 
         [Route("api/projects/all")]
         public IHttpActionResult Get(int page, int pageSize = GlobalConstants.DefaultPageSize)
         {
             var result = this.projects
-                   .All()
-                   .OrderByDescending(pr => pr.CreatedOn)
-                   .Skip((page - 1) * pageSize)
-                   .Take(pageSize)
+                   .All(page, pageSize)
                    .Select(Models.Projects.SoftwareProjectDetailsResponseModel.FromModel)
                    .ToList();
 

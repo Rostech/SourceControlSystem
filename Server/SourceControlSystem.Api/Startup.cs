@@ -13,7 +13,8 @@ namespace SourceControlSystem.Api
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
-            // 1:41
+            // 2.25
+            // 2.26.54 za da moje da se injektira v servicite
         }
     }
 }
