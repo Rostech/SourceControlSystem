@@ -1,26 +1,12 @@
 ﻿namespace SourceControlSystem.Api.Models.Projects
 {
+    using Infrastructure.Mappings;
     using SourceControlSystem.Models;
     using System;
-    using System.Linq;
-    using System.Linq.Expressions;
+    using AutoMapper;
 
-    public class SoftwareProjectDetailsResponseModel
+    public class SoftwareProjectDetailsResponseModel : IMapFrom<SoftwareProject>, IHaveCustomMappings
     {
-        public static Expression<Func<SoftwareProject, SoftwareProjectDetailsResponseModel>> FromModel
-        {
-            get
-            {
-                return pr => new SoftwareProjectDetailsResponseModel
-                {
-                    Id = pr.Id,
-                    Name = pr.Name,
-                    CreatedOn = pr.CreatedOn,
-                    TotalUsers = pr.Users.Count()
-                };
-            }
-        }
-
         public int Id { get; set; }
 
         public string Name { get; set; }
@@ -28,5 +14,10 @@
         public DateTime CreatedOn { get; set; }
 
         public int TotalUsers { get; set; }
+
+        public void CreateMappings(IConfiguration config)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

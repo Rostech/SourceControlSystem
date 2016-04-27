@@ -2,13 +2,12 @@
 {
     using System.Web.Http;
     using System.Linq;
-
-    using SourceControlSystem.Data;
-    using SourceControlSystem.Models;
     using Common.Constants;
     using Services.Data.Contracts;
-    using Services.Data;
     using System.Web.Http.Cors;
+    using Models.Projects;
+    using AutoMapper.QueryableExtensions;
+    using AutoMapper;
     public class ProjectsController : ApiController
     {
         private readonly IProjectsService projects;
@@ -21,9 +20,12 @@
         [EnableCors("*", "*", "*")]
         public IHttpActionResult Get()
         {
+            Mapper.CreateMap<SourceControlSystem.Models.SoftwareProject, SoftwareProjectDetailsResponseModel>()
+                .ForMember(s => s.TotalUsers, opts => opts.MapFrom(s => s.Users.Count()));
+
             var result = this.projects
                 .All(page: 1)
-                .Select(Models.Projects.SoftwareProjectDetailsResponseModel.FromModel)
+                .ProjectTo<SoftwareProjectDetailsResponseModel>()
                 .ToList();
 
             return this.Ok(result);
@@ -40,7 +42,7 @@
             var result = this.projects
                 .All()
                 .Where(pr => pr.Name == id && (!pr.Private && pr.Users.Any(c => c.UserName == this.User.Identity.Name)))
-                .Select(Models.Projects.SoftwareProjectDetailsResponseModel.FromModel)
+                .ProjectTo<SoftwareProjectDetailsResponseModel>()
                 .FirstOrDefault();
 
             if (result == null)
@@ -73,7 +75,7 @@
         {
             var result = this.projects
                    .All(page, pageSize)
-                   .Select(Models.Projects.SoftwareProjectDetailsResponseModel.FromModel)
+                   .ProjectTo<SoftwareProjectDetailsResponseModel>()
                    .ToList();
 
             return this.Ok(result);
