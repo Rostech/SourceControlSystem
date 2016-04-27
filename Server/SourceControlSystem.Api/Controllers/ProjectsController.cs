@@ -8,7 +8,7 @@
     using Common.Constants;
     using Services.Data.Contracts;
     using Services.Data;
-
+    using System.Web.Http.Cors;
     public class ProjectsController : ApiController
     {
         private readonly IProjectsService projects;
@@ -18,6 +18,7 @@
             this.projects = projectService;
         }
 
+        [EnableCors("*", "*", "*")]
         public IHttpActionResult Get()
         {
             var result = this.projects
