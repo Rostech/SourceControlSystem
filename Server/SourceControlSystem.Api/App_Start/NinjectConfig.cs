@@ -13,7 +13,7 @@ namespace SourceControlSystem.Api.App_Start
     using Ninject.Extensions.Conventions;
     using Data;
     using Common.Constants;
-
+    using Infrastructure;
     public static class NinjectConfig 
     {
         private static readonly Bootstrapper bootstrapper = new Bootstrapper();
@@ -48,6 +48,7 @@ namespace SourceControlSystem.Api.App_Start
                 kernel.Bind<Func<IKernel>>().ToMethod(ctx => () => new Bootstrapper().Kernel);
                 kernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();
 
+                ObjectFactory.Initialize(kernel);
                 RegisterServices(kernel);
                 return kernel;
             }

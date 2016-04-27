@@ -7,7 +7,7 @@
     using System.Web.Http.Cors;
     using Models.Projects;
     using AutoMapper.QueryableExtensions;
-    using AutoMapper;
+
     public class ProjectsController : ApiController
     {
         private readonly IProjectsService projects;
@@ -20,9 +20,6 @@
         [EnableCors("*", "*", "*")]
         public IHttpActionResult Get()
         {
-            Mapper.CreateMap<SourceControlSystem.Models.SoftwareProject, SoftwareProjectDetailsResponseModel>()
-                .ForMember(s => s.TotalUsers, opts => opts.MapFrom(s => s.Users.Count()));
-
             var result = this.projects
                 .All(page: 1)
                 .ProjectTo<SoftwareProjectDetailsResponseModel>()

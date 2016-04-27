@@ -4,6 +4,7 @@
     using SourceControlSystem.Models;
     using System;
     using AutoMapper;
+    using System.Linq;
 
     public class SoftwareProjectDetailsResponseModel : IMapFrom<SoftwareProject>, IHaveCustomMappings
     {
@@ -17,7 +18,8 @@
 
         public void CreateMappings(IConfiguration config)
         {
-            throw new NotImplementedException();
+            config.CreateMap<SoftwareProject, SoftwareProjectDetailsResponseModel>()
+                .ForMember(s => s.TotalUsers, opts => opts.MapFrom(s => s.Users.Count()));
         }
     }
 }
