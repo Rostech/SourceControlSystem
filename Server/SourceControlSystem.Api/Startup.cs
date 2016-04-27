@@ -15,6 +15,7 @@ namespace SourceControlSystem.Api
             ConfigureAuth(app);
             // 2.25
             // 2.26.54 za da moje da se injektira v servicite
+            // perfektnata situaciq e na vseki edin request da imame po 1 db context.
         }
     }
 }
