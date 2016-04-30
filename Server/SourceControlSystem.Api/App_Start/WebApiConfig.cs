@@ -5,6 +5,9 @@
 
     public static class WebApiConfig
     {
+        // used in route tests.
+        public static HttpConfiguration CurrentConfig { get; private set; }
+
         public static void Register(HttpConfiguration config)
         {
             // Web API configuration and services
@@ -23,6 +26,8 @@
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            CurrentConfig = config;
         }
     }
 }
